@@ -1,0 +1,89 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<!-- content -->
+<div class="mil-content">
+  <div id="swupMain" class="mil-main-transition">
+    <!-- banner -->
+    <div class="mil-inner-banner">
+      <div class="mil-animation-frame">
+        <div
+          class="mil-animation mil-position-4 mil-dark mil-scale"
+          data-value-1="6"
+          data-value-2="1.4"
+        ></div>
+      </div>
+      <div class="mil-banner-content mil-up">
+        <div class="container">
+          <ul class="mil-breadcrumbs mil-mb-60">
+            <li><a href="{% url 'home-1' %}">Homepage</a></li>
+            <li><a href="{% url 'services' %}">Certificates</a></li>
+          </ul>
+          <h1 class="mil-mb-60">
+            Certificates <span class="mil-thin">Page </span><br />
+          </h1>
+        </div>
+      </div>
+    </div>
+    <!-- banner end -->
+
+    <div class="container" style="margin-top: 60px; margin-bottom: 60px">
+      {% for c in category %}
+      <div style="margin-bottom: 20px">
+        <div
+          onclick="toggleDropdown(this)"
+          style="
+            cursor: pointer;
+            padding: 15px 0;
+            border-bottom: 1px solid #ccc;
+          "
+        >
+          <h5><strong>{{c.name}} Certificates</strong></h5>
+        </div>
+
+        <ul
+          style="
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.4s ease-out;
+          "
+        >
+          {% for cer in certificates %} {% if cer.category.id == c.id %}
+          <li
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              padding: 12px 0;
+              border-bottom: 1px solid #eee;
+            "
+          >
+            <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" style="width: 20px; margin-right: 10px;" />
+
+            <a
+              href="#"
+              onclick="window.open('{{ cer.pdf.url }}', '_blank'); return false;"
+              style="
+                flex: 1;
+                margin-left: 10px;
+                text-decoration: none;
+                color: inherit;
+              "
+            >
+              {{ cer.description }}
+            </a>
+            <span style="white-space: nowrap; font-weight: 500"
+              >{{ cer.name }}</span
+            >
+          </li>
+          {% endif %} {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<!-- content -->
+{% endblock content %}

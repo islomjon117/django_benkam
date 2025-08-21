@@ -1,0 +1,120 @@
+{% extends 'base.html' %} 
+{% load static%}
+    {% block content %}
+
+      <!-- content -->
+       <div class="mil-content">
+        <div id="swupMain" class="mil-main-transition">
+          <!-- banner -->
+          <div class="mil-inner-banner">
+            <div class="mil-banner-content mil-up">
+              <div class="mil-animation-frame">
+                <div
+                  class="mil-animation mil-position-4 mil-dark mil-scale"
+                  data-value-1="6"
+                  data-value-2="1.4"
+                ></div>
+              </div>
+              <div class="container">
+                <ul class="mil-breadcrumbs mil-mb-60">
+                  <li><a href="{% url 'home-1' %}">Home </a></li>
+                  <li><a href="{% url 'portfolio2_list' %}">Die Design Shop</a></li>
+                  <li><a href="{% url 'portfolio2_list' %}">{{ die_shop.name }}</a></li>
+                </ul>
+                <h1 class="mil-mb-60">
+                  BENKAM<span class="mil-thin"> {{ die_shop.name }}</span>
+                </h1>
+                <a
+                  href="#project"
+                  class="mil-link mil-dark mil-arrow-place mil-down-arrow"
+                >
+                  <span>Read more</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- banner end -->
+
+          <!-- project -->
+<section>
+  <div class="container mil-p-120-120" id="project">
+    <div class="row justify-content-between mil-mb-120">
+      <div class="col-lg-4">
+        <div class="mil-p-0-120">
+          <h5 class="mil-up mil-mb-30">{{ die_shop.name }}</h5>
+          {% if die_shop.description %}
+            <p class="mil-up mil-mb-30">{{ die_shop.description }}</p>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="mil-image-frame mil-horizontal mil-up mil-mb-30">
+          {% if die_shop.image %}
+            <img src="{{ die_shop.image.url }}" alt="{{ die_shop.name }}" />
+            <a data-fancybox="gallery" data-no-swup href="{{ die_shop.image.url }}" class="mil-zoom-btn">
+              <img src="{% static 'img/icons/zoom.svg' %}" alt="zoom" />
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="mil-works-nav mil-up">
+      {% if prev_shop %}
+        <a href="{% url 'project1' prev_shop.id %}" class="mil-link mil-dark mil-arrow-place mil-icon-left">
+          <span>Prev project</span>
+        </a>
+      {% endif %}
+
+      <a href="{% url 'portfolio2_list' %}" class="mil-link mil-dark">
+        <span>All projects</span>
+      </a>
+
+      {% if next_shop %}
+        <a href="{% url 'project1' next_shop.id %}" class="mil-link mil-dark mil-arrow-place">
+          <span>Next project</span>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+
+
+          <!-- project end -->
+
+          <!-- call to action -->
+          <section class="mil-soft-bg">
+            <div class="container mil-p-120-120">
+              <div class="row">
+                <div class="col-lg-10">
+                  <span
+                    class="mil-suptitle mil-suptitle-right mil-suptitle-dark mil-up"
+                    >Looking to make your mark? We'll help you turn <br />
+                    your project into a success story.</span
+                  >
+                </div>
+              </div>
+              <div class="mil-center">
+                <h2 class="mil-up mil-mb-60">
+                  Ready to bring your
+                  <span class="mil-thin">ideas to</span> life? <br />
+                  We're <span class="mil-thin">here to help</span>
+                </h2>
+                <div class="mil-up">
+                  <a href="contact.html" class="mil-button mil-arrow-place"
+                    ><span>Contact us</span></a
+                  >
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- call to action end -->
+
+      
+
+      
+        </div>
+      </div>
+      <!-- content -->
+    {% endblock content %}
