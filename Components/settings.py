@@ -14,7 +14,11 @@ SECRET_KEY = 'django-insecure-t8@1hs2$_)^=db4(w%-5-zb0+353ah8!q!p94$f4nx7+lbog-h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "django-benkam.onrender.com",  # Render domeni
+    "localhost",
+    "127.0.0.1",
+]
 
 
 # Application definition
