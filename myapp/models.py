@@ -84,4 +84,38 @@ class Certificate(models.Model):
     def __str__(self):
         return self.name or "No name"
     
+class ServicePage(models.Model):
+    title = models.CharField(max_length=200)  
+    subtitle = models.CharField(max_length=200, blank=True, null=True)  
+    description = models.TextField(blank=True, null=True)  
+    created_at = models.DateTimeField(auto_now_add=True)  
+    updated_at = models.DateTimeField(auto_now=True)  
+
+    def __str__(self):
+        return self.title
+
+
+class ServiceAccordion(models.Model):
+    service = models.ForeignKey(ServicePage, on_delete=models.CASCADE, related_name="accordions")
+    accordion_title = models.CharField(max_length=200)
+    accordion_desc = models.TextField()
+
+    def __str__(self):
+        return f"{self.service.title} - {self.accordion_title}"
     
+
+class BlogPost(models.Model):
+    title = models.CharField(max_length=200)      
+    description = models.TextField()             
+    date = models.DateField()                   
+
+    def __str__(self):
+        return self.title
+
+
+class BlogImage(models.Model):
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name="images")
+    image = models.ImageField(upload_to="blog_images/")
+
+    def __str__(self):
+        return f"Image for {self.post.title}"

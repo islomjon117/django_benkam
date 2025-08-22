@@ -1,171 +1,64 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% load static %}
-    {% block content %}
-      <!-- content -->
-      <div class="mil-content">
-        <div id="swupMain" class="mil-main-transition">
-          <!-- banner -->
-          <div class="mil-inner-banner">
-            <div class="mil-animation-frame">
-              <div
-                class="mil-animation mil-position-4 mil-dark mil-scale"
-                data-value-1="6"
-                data-value-2="1.4"
-              ></div>
-            </div>
-            <div class="mil-banner-content mil-up">
-              <div class="container">
-                <ul class="mil-breadcrumbs mil-mb-60">
-                  <li><a href="home-1.html">Homepage</a></li>
-                  <li><a href="{% url 'services' %}">Services</a></li>
-                  <li><a href="service.html">Service</a></li>
-                </ul>
-                <h1 class="mil-mb-60">
-                  PROFILE <span class="mil-thin">WITHOUT </span><br />
-                  PROCESSING <span class="mil-thin">(Mill Finish)</span>
-                </h1>
-                <a
-                  href="#service"
-                  class="mil-link mil-dark mil-arrow-place mil-down-arrow"
-                >
-                  <span>About service</span>
-                </a>
-              </div>
-            </div>
+{% block content %}
+<div class="mil-content">
+  <div id="swupMain" class="mil-main-transition">
+
+    <!-- banner -->
+    <div class="mil-inner-banner">
+      <div class="mil-banner-content mil-up">
+        <div class="container">
+          <ul class="mil-breadcrumbs mil-mb-60">
+            <li><a href="{% url 'home-1' %}">Homepage</a></li>
+            <li><a href="{% url 'home-1' %}">Services</a></li>
+            <li>{{ service.title }}</li>
+          </ul>
+          <h1 class="mil-mb-60">
+            {{ service.title }} <span class="mil-thin">{{ service.subtitle }}</span>
+          </h1>
+          <a href="#service" class="mil-link mil-dark mil-arrow-place mil-down-arrow">
+            <span>About service</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- banner end -->
+
+    <!-- service -->
+    <section id="service">
+      <div class="container mil-p-120-90">
+        <div class="row justify-content-between">
+
+          <!-- description -->
+          <div class="col-lg-4 mil-relative mil-mb-90">
+            <p class="mil-up mil-mb-30">
+              {{ service.description }}
+            </p>
           </div>
-          <!-- banner end -->
 
-          <!-- service -->
-              <section id="service">
-            <div class="container mil-p-120-90">
-              <div class="row justify-content-between">
-                <div class="col-lg-4 mil-relative mil-mb-90">
-                  <p class="mil-up mil-mb-30">
-                    Aluminum profile produced by hot extrusion without
-                    subsequent surface treatment. Ideal for companies planning
-                    their own painting, anodizing, or mechanical processing.
-                    Provides excellent strength and geometric precision.
-                    Manufactured from 6060 and 6063 alloy series, available in
-                    heat-treated conditions (T5, T6). Wide range of shapes:
-                    structural, window and door, façade, and special profiles.
-                  </p>
+          <!-- accordions -->
+          <div class="col-lg-6">
+            {% for acc in accordions %}
+              <div class="mil-accordion-group mil-up">
+                <div class="mil-accordion-menu">
+                  <p class="mil-accordion-head">{{ acc.accordion_title }}</p>
+                  <div class="mil-symbol mil-h3">
+                    <div class="mil-plus">+</div>
+                    <div class="mil-minus">-</div>
+                  </div>
                 </div>
-                <div class="col-lg-6">
-                  <div class="mil-accordion-group mil-up">
-                    <div class="mil-accordion-menu">
-                      <p class="mil-accordion-head">
-                        Construction and architecture
-                      </p>
-
-                      <div class="mil-symbol mil-h3">
-                        <div class="mil-plus">+</div>
-                        <div class="mil-minus">-</div>
-                      </div>
-                    </div>
-                    <div class="mil-accordion-content">
-                      <p class="mil-mb-30">
-                        Window and door frames Facade and curtain wall
-                        structures Posts, handrails, decorative elements
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="mil-accordion-group mil-up">
-                    <div class="mil-accordion-menu">
-                      <p class="mil-accordion-head">Automotive industry</p>
-
-                      <div class="mil-symbol mil-h3">
-                        <div class="mil-plus">+</div>
-                        <div class="mil-minus">-</div>
-                      </div>
-                    </div>
-                    <div class="mil-accordion-content">
-                      <p class="mil-mb-30">
-                        Body and platform elements Guides and profiles for vans,
-                        trailers Fastening and reinforcing elements
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="mil-accordion-group mil-up">
-                    <div class="mil-accordion-menu">
-                      <p class="mil-accordion-head">Мебель и интерьер</p>
-
-                      <div class="mil-symbol mil-h3">
-                        <div class="mil-plus">+</div>
-                        <div class="mil-minus">-</div>
-                      </div>
-                    </div>
-                    <div class="mil-accordion-content">
-                      <p class="mil-mb-30">
-                        Frames for cabinets, partitions and showcases Base for
-                        office partitions Profiles for kitchen systems, sliding
-                        doors
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="mil-accordion-group mil-up">
-                    <div class="mil-accordion-menu">
-                      <p class="mil-accordion-head">
-                        Electrical engineering and lighting
-                      </p>
-
-                      <div class="mil-symbol mil-h3">
-                        <div class="mil-plus">+</div>
-                        <div class="mil-minus">-</div>
-                      </div>
-                    </div>
-                    <div class="mil-accordion-content">
-                      <p class="mil-mb-30">
-                        Cooling radiators Housings and profiles for LED lamps
-                        Guides for cables and ventilation systems
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="mil-accordion-group mil-up">
-                    <div class="mil-accordion-menu">
-                      <p class="mil-accordion-head">Industrial equipment</p>
-
-                      <div class="mil-symbol mil-h3">
-                        <div class="mil-plus">+</div>
-                        <div class="mil-minus">-</div>
-                      </div>
-                    </div>
-                    <div class="mil-accordion-content">
-                      <p class="mil-mb-30">
-                        Profiles for assembly of machines, conveyors Protective
-                        fences Racks, guides, mounting frames
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="mil-accordion-group mil-up">
-                    <div class="mil-accordion-menu">
-                      <p class="mil-accordion-head">
-                        Agriculture and greenhouses
-                      </p>
-
-                      <div class="mil-symbol mil-h3">
-                        <div class="mil-plus">+</div>
-                        <div class="mil-minus">-</div>
-                      </div>
-                    </div>
-                    <div class="mil-accordion-content">
-                      <p class="mil-mb-30">
-                        Greenhouse, hothouse, canopy frames Solar panel
-                        structures Truss posts and supporting elements
-                      </p>
-                    </div>
-                  </div>
+                <div class="mil-accordion-content">
+                  <p class="mil-mb-30">{{ acc.accordion_desc }}</p>
                 </div>
               </div>
-            </div>
-          </section>
-          <!-- service end -->
+            {% endfor %}
+          </div>
 
         </div>
       </div>
-      <!-- content -->
-    {% endblock content %}
+    </section>
+    <!-- service end -->
+
+  </div>
+</div>
+{% endblock content %}

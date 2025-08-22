@@ -1,7 +1,8 @@
 import django.db
 from django.shortcuts import render, get_object_or_404
-from .models import Category, Certificate, die_shop, Offer, PortfolioPage, TeamMember
-
+from .models import (BlogPost, Category, Certificate, die_shop, Offer, PortfolioPage, ServicePage,
+    TeamMember)
+import random
 
 
 def home(request):
@@ -9,7 +10,6 @@ def home(request):
         name__iexact='Srajidinov Alisher Taxirovich',
         role__iexact='Deputy Chairman of the Management Board Chief Operating Officer'
     ).first()
-
 
     person2 = TeamMember.objects.filter(
         name__iexact='Hosilov Shaxrizod',
@@ -27,6 +27,11 @@ def home(request):
     ).first()
 
     team_members = TeamMember.objects.all()
+    services = ServicePage.objects.prefetch_related("accordions").all()
+
+    # 🔥 Yangi qo‘shilgan qism: Random yangiliklar
+    posts = list(BlogPost.objects.all())
+    random_posts = random.sample(posts, min(len(posts), 3))  # 3 tasini tanlaydi
 
     context = {
         'person1': person1,
@@ -34,10 +39,11 @@ def home(request):
         'person3': person3,
         'person4': person4,
         'team_members': team_members,
+        'services': services,
+        'random_posts': random_posts,  # yangiliklarni ham contextga qo‘shdik
     }
 
     return render(request, 'home-1.html', context)
-
 
 def home2(request):
     return render(request, 'home-2.html')
@@ -83,8 +89,17 @@ def project5(request):
 def project6(request):
     return render(request, 'project-6.html')
 
-def publication(request):
-    return render(request, 'publication.html')
+def publication(request, pk):
+    post = get_object_or_404(BlogPost, pk=pk)
+
+    # Boshqa postlardan random tanlash (shu postni o‘zini chiqarib tashlaymiz)
+    other_posts = list(BlogPost.objects.exclude(pk=pk))
+    similar_posts = random.sample(other_posts, min(len(other_posts), 2))  # faqat 2 tasini chiqaramiz
+
+    return render(request, 'publication.html', {
+        'post': post,
+        'similar_posts': similar_posts
+    })
 
 def service(request):
     return render(request, 'service.html')
@@ -148,3 +163,16 @@ def offer_list(request):
 def project5(request, id):
     offer = get_object_or_404(Offer, id=id)
     return render(request, 'project-5.html', {'offer': offer})
+
+
+def service_detail(request, pk):
+    service = get_object_or_404(ServicePage, pk=pk)
+    accordions = service.accordions.all()
+    return render(request, "service.html", {
+        "service": service,
+        "accordions": accordions
+    })
+    
+def blog_inner(request):
+    posts = BlogPost.objects.all().order_by('-date')
+    return render(request, 'blog-inner.html', {'posts': posts})

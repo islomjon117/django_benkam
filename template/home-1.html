@@ -1,6 +1,4 @@
-{% extends 'base.html' %} 
-{% load  static  %}
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
 <!-- content -->
 <div class="mil-content">
@@ -31,7 +29,7 @@
         <div class="container">
           <div class="mil-banner-content mil-up">
             <h1 class="mil-muted mil-mb-60">
-              <span style="color: #52b947">BENKAM</span>
+              <span style="color: #52b947" style="font-weight: 900;">BENKAM</span>
               <span class="mil-thin"
                 >—precision in every millimeter reliability in every
                 profile</span
@@ -205,66 +203,23 @@
               >
             </div>
           </div>
-
           <div class="row mil-services-grid m-0">
+            {% for service in services %}
             <div class="col-md-6 col-lg-3 mil-services-grid-item p-0">
-              <a href="{% url 'service' %}" class="mil-service-card-sm mil-up">
-                <h5 class="mil-muted mil-mb-30">
-                  PROFILE WITHOUT <br />PROCESSING
-                </h5>
+              <a
+                href="{% url 'service_detail' service.pk %}"
+                class="mil-service-card-sm mil-up"
+              >
+                <h5 class="mil-muted mil-mb-30">{{ service.title }}</h5>
                 <p class="mil-light-soft mil-mb-30">
-                  Our creative agency is a team of professionals focused on
-                  helping your brand grow.
+                  {{ service.description|truncatewords:15 }}...
                 </p>
                 <div
                   class="mil-button mil-icon-button-sm mil-arrow-place"
                 ></div>
               </a>
             </div>
-            <div class="col-md-6 col-lg-3 mil-services-grid-item p-0">
-              <a href="{% url 'service' %}" class="mil-service-card-sm mil-up">
-                <h5 class="mil-muted mil-mb-30">
-                  ANODIZED <br />
-                  PROFILE
-                </h5>
-                <p class="mil-light-soft mil-mb-30">
-                  Our creative agency is a team of professionals focused on
-                  helping your brand grow.
-                </p>
-                <div
-                  class="mil-button mil-icon-button-sm mil-arrow-place"
-                ></div>
-              </a>
-            </div>
-            <div class="col-md-6 col-lg-3 mil-services-grid-item p-0">
-              <a href="{% url 'service' %}" class="mil-service-card-sm mil-up">
-                <h5 class="mil-muted mil-mb-30">
-                  POWDER <br />
-                  COATING
-                </h5>
-                <p class="mil-light-soft mil-mb-30">
-                  Our creative agency is a team of professionals focused on
-                  helping your brand grow.
-                </p>
-                <div
-                  class="mil-button mil-icon-button-sm mil-arrow-place"
-                ></div>
-              </a>
-            </div>
-            <div class="col-md-6 col-lg-3 mil-services-grid-item p-0">
-              <a href="{% url 'service' %}" class="mil-service-card-sm mil-up">
-                <h5 class="mil-muted mil-mb-30">
-                  DECORATIVE COATING (SUBLIMATION)
-                </h5>
-                <p class="mil-light-soft mil-mb-30">
-                  Our creative agency is a team of professionals focused on
-                  helping your brand grow.
-                </p>
-                <div
-                  class="mil-button mil-icon-button-sm mil-arrow-place"
-                ></div>
-              </a>
-            </div>
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -317,7 +272,11 @@
                 <div class="col-sm-6">
                   {% for member in team_members|slice:":2" %}
                   <div class="mil-team-card mil-up mil-mb-30 our_team">
-                    <img src="{{ member.image.url }}" alt="Team member" class="w-48 h-48 object-cover rounded-lg" />
+                    <img
+                      src="{{ member.image.url }}"
+                      alt="Team member"
+                      class="w-48 h-48 object-cover rounded-lg"
+                    />
                     <div class="mil-description">
                       <div class="mil-secrc-text">
                         <h5 class="mil-muted mil-mb-5">
@@ -366,7 +325,11 @@
 
                   {% for member in team_members|slice:"2:4" %}
                   <div class="mil-team-card mil-up mil-mb-30 our_team">
-                    <img src="{{ member.image.url }}" alt="Team member" class="w-48 h-48 object-cover rounded-lg" />
+                    <img
+                      src="{{ member.image.url }}"
+                      alt="Team member"
+                      class="w-48 h-48 object-cover rounded-lg"
+                    />
                     <div class="mil-description">
                       <div class="mil-secrc-text">
                         <h5 class="mil-muted mil-mb-5">
@@ -702,98 +665,90 @@
           </div>
           <div class="col-lg-6 mil-mb-30">
             <div class="mil-adaptive-right mil-up">
-              <a href="{% url 'blog2' %}" class="mil-link mil-dark mil-arrow-place">
+              <a
+                href="{% url 'blog_inner' %}"
+                class="mil-link mil-dark mil-arrow-place"
+              >
                 <span>View all</span>
               </a>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-6">
-            <a href="{% url 'publication' %}" class="mil-blog-card mil-mb-60">
-              <div class="mil-cover-frame mil-up">
-                <img src="{% static 'img/blog/news1.jpg' %}" alt="cover" />
-              </div>
-              <div class="mil-post-descr">
-                <div class="mil-labels mil-up mil-mb-30">
-                  <div class="mil-label mil-upper mil-accent">TECHNOLOGY</div>
-                  <div class="mil-label mil-upper">April 18 2025</div>
-                </div>
-                <h4 class="mil-up mil-mb-30">
-                  Benkam ишлаб чиқариш майдончаси – ёшлар ва бўлажак
-                  мутахассислар учун очиқ
-                </h4>
-                <p class="mil-post-text mil-up mil-mb-30">
-                  Халқаро ривожланиш стратегияси доирасида Benkam жамоаси қолип
-                  тизимлари ва қурилиш технологиялари соҳасида жаҳон
-                  етакчиларидан бири бўлган PERI вакиллари билан ишбилармонлик
-                  учрашувини ўтказди. 💠Музокаралар чоғида қурилиш саноати учун
-                  алюминий ечимлари соҳасидаги ҳамкорлик истиқболлари,
-                  шунингдек, Benkam маҳсулотларини PERI глобал таъминот
-                  занжирларига интеграция қилиш имкониятлари муҳокама қилинди.
-                  Учрашув халқаро миқёсда стратегик саноат шериклигини
-                  шакллантириш йўлидаги муҳим қадам бўлди.
-                </p>
-                <div class="mil-link mil-dark mil-arrow-place mil-up">
-                  <span>Read more</span>
-                </div>
-              </div>
-            </a>
-          </div>
 
+        <div class="row">
+          {% for post in random_posts %}
           <div class="col-lg-6">
-            <a href="{% url 'publication' %}" class="mil-blog-card mil-mb-60">
+            <a href="#" class="mil-blog-card mil-mb-60">
               <div class="mil-cover-frame mil-up">
-                <img src="{% static 'img/blog/news2.jpg' %}" alt="cover" />
+                {% if post.images.first %}
+                <img src="{{ post.images.first.image.url }}" alt="cover" />
+                {% else %}
+                <img src="{% static 'img/blog/default.jpg' %}" alt="cover" />
+                {% endif %}
               </div>
               <div class="mil-post-descr">
                 <div class="mil-labels mil-up mil-mb-30">
-                  <div class="mil-label mil-upper mil-accent">TECHNOLOGY</div>
-                  <div class="mil-label mil-upper">April 30 2025</div>
+                  <div class="mil-label mil-upper">{{ post.date }}</div>
                 </div>
-                <h4 class="mil-up mil-mb-30">
-                  Benkam ишлаб чиқариш майдончаси – ёшлар ва бўлажак
-                  мутахассислар учун очиқ
+                <h4
+                  class="mil-up mil-mb-30"
+                  style="
+                    display: block;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                  "
+                >
+                  {{ post.title }}
                 </h4>
                 <p class="mil-post-text mil-up mil-mb-30">
-                  Benkam ишлаб чиқариши ёш авлодни ривожлантириш ва талабаларни
-                  касбга йўналтиришга қаратилган ташаббусларни фаол
-                  қўллаб-қувватлашда давом этмоқда. Корхонанинг навбатдаги
-                  ташрифчилари Навоий вилоят Кармана туман 1-сонли саноат
-                  техникуми ўқувчилари бўлишди. Танишув давомида ўқитувчилар ва
-                  ўқувчилар замонавий технологияларни кўздан кечириш, алюминий
-                  профилини ишлаб чиқариш, унга якуний ишлов бериш жараёнларини
-                  кўриш, шунингдек, корхона мутахассисларига ўзларини
-                  қизиқтирган саволларни бериш имкониятига эга бўлдилар.
+                  {{ post.description|truncatewords:40 }}
                 </p>
+                <a href="{% url 'publication' post.id %}">
                 <div class="mil-link mil-dark mil-arrow-place mil-up">
-                  <span>Read more</span>
-                </div>
+                    <span>Read more</span>
+                  </div>
+                </a>
               </div>
             </a>
           </div>
+          {% endfor %}
         </div>
       </div>
     </section>
     <!-- blog end -->
 
-    <div style="position: relative; margin: auto; top: 10px;">
-    <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3067.383340752172!2d65.15313359198903!3d40.149860286575716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f51b50a57a49c01%3A0xc5ba5b00baa15ecb!2sBENKAM%20Alu%20Extrusions!5e1!3m2!1sru!2s!4v1755177936875&layer=s!5m2!1sru!2s" 
-        width="100%" 
-        height="550" 
-        
-        loading="lazy" 
-        referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
+    <div style="position: relative; margin: auto; top: 10px">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3067.383340752172!2d65.15313359198903!3d40.149860286575716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f51b50a57a49c01%3A0xc5ba5b00baa15ecb!2sBENKAM%20Alu%20Extrusions!5e1!3m2!1sru!2s!4v1755177936875&layer=s!5m2!1sru!2s"
+        width="100%"
+        height="550"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      >
+      </iframe>
 
-    <!-- Floating Button -->
-    <a href="https://akfagroup.com/benkam/" 
-       target="_blank"
-       style="position: absolute; bottom: 28px; right: 70px; background: rgba(0, 120, 255, 0.9); color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold; text-decoration: none; font-size: 14px; transition: background 0.3s;">
+      <!-- Floating Button -->
+      <a
+        href="https://akfagroup.com/benkam/"
+        target="_blank"
+        style="
+          position: absolute;
+          bottom: 28px;
+          right: 70px;
+          background: rgba(0, 120, 255, 0.9);
+          color: white;
+          padding: 10px 20px;
+          border-radius: 8px;
+          font-weight: bold;
+          text-decoration: none;
+          font-size: 14px;
+          transition: background 0.3s;
+        "
+      >
         360° View
-    </a>
-</div>
+      </a>
+    </div>
   </div>
 </div>
 <!-- content -->
